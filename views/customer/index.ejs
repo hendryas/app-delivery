@@ -1,0 +1,126 @@
+<%- include('../templates/header.ejs') %>
+<%- include('../templates/navbar.ejs') %>
+
+<div class="container">
+
+    <div class="col-lg mt-5">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">Management Customer</h4>
+                <p>Silahkan klik tombol dibawah ini untuk menambahkan Customer</p>
+                <a href="#" class="btn btn-outline-primary mb-3" data-toggle="modal"
+                    data-target="#newCustomerModal">Tambahkan
+                    Customer baru</a>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Nama Customer</th>
+                                <th>Umur</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% no = 1 %>
+
+                            <% dataCustomer.forEach(customer => { %>
+                            <tr class="text-center">
+                                <th scope="row"><%= no %></th>
+                                <td><%= customer.nama %></td>
+                                <td><%= customer.umur %></td>
+                                <td>
+                                    <img src="<%= customer.image %>" alt="profile-image" width="100">
+                                </td>
+                                <td>
+                                    <a href="#"><span class="badge badge-success" data-toggle="modal"
+                                            data-target="#editCustomerModal<%= customer.id %>">Edit</span></a>
+                                    <a href="/customers/delete/<%= customer.id %>"><span
+                                            class="badge badge-danger ml-3">Delete</span></a>
+                                </td>
+                            </tr>
+                            <%no++ %>
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomerModalLabel">Tambah Customer Baru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/customers/add" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama Customer</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                placeholder="Input Nama Customer" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="umur">Umur</label>
+                            <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                                maxlength="3" placeholder="Input Umur Customer" id="umur" name="umur">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% dataCustomer.forEach(customer => { %>
+    <div class="modal fade" id="editCustomerModal<%= customer.id %>" tabindex="-1"
+        aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/customers/edit/<%= customer.id %>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama Customer</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                placeholder="Input Nama Customer" autocomplete="off" required
+                                value="<%= customer.nama %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="umur">Umur</label>
+                            <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                                maxlength="3" placeholder="Input Umur Customer" id="umur" name="umur"
+                                value="<%= customer.umur %>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% })%>
+
+</div>
+
+
+<%- include('../templates/footer.ejs') %>

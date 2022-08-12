@@ -1,0 +1,184 @@
+<%- include('../templates/header.ejs') %>
+<%- include('../templates/navbar.ejs') %>
+
+<div class="container">
+    <div class="col-lg mt-5">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">Management Driver</h4>
+                <p>Silahkan klik tombol dibawah ini untuk menambahkan Driver</p>
+                <a href="#" class="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal"
+                    data-target="#newDriverModal">Tambahkan Driver baru</a>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Nama Driver</th>
+                                <th>NID (Nomor Induk Driver)</th>
+                                <th>Kota Driver</th>
+                                <th>Gender</th>
+                                <th>Nama Resto</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% no = 1 %>
+
+                            <% dataDriver.forEach(driver => { %>
+                            <tr class="text-center">
+                                <th scope="row"><%= no %></th>
+                                <td><%= driver.nama %></td>
+                                <td><%= driver.nid %></td>
+                                <td><%= driver.kota %></td>
+                                <td><%= driver.gender %></td>
+                                <td>
+                                    <% driver.restos.forEach(resto => { %>
+                                    <%= resto.nama %>,
+                                    <% })%>
+                                </td>
+                                <td>
+                                    <a href="#"><span class="badge badge-success" data-toggle="modal"
+                                            data-target="#editDriverModal<%= driver.id %>">Edit</span></a>
+                                    <a href="/drivers/delete/<%= driver.id %>"><span
+                                            class="badge badge-danger ml-3">Delete</span></a>
+                                </td>
+                            </tr>
+                            <%no++ %>
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<div class="modal fade" id="newDriverModal" tabindex="-1" aria-labelledby="newDriverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newDriverModalLabel">Tambah Driver Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/drivers/add" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama Driver</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Driver"
+                            autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nid">NID (Nomor Induk Driver)</label>
+                        <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                            maxlength="5" placeholder="Input NID Maksimal 5 Karakter" id="nid" name="nid">
+                    </div>
+                    <div class="form-group">
+                        <label for="kota">Kota</label>
+                        <input type="text" class="form-control" id="kota" name="kota" placeholder="Input Kota Driver"
+                            autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label><br>
+                        <select class="form-control selectpicker" data-live-search="true" autocomplete="off" required
+                            name="gender" id="gender">
+                            <option value="">- Pilih Gender -</option>
+                            <option value="laki-laki">Laki - Laki</option>
+                            <option value="perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Resto Bekerja</label><br>
+                        <div class="p-3 row">
+                            <% dataResto.forEach(resto => { %>
+                            <div class="col-sm-6 form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck" name="resto_ids"
+                                    value="<%= resto.id %>">
+                                <label class=" form-check-label" for="dropdownCheck">
+                                    <%= resto.nama %>
+                                </label>
+                            </div>
+                            <% } ) %>
+                        </div>
+                    </div>
+
+                </div>
+                <div class=" modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% dataDriver.forEach(driver => { %>
+<div class="modal fade" id="editDriverModal<%= driver.id %>" tabindex="-1" aria-labelledby="editDriverModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDriverModalLabel">Edit Driver</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/drivers/edit/<%= driver.id %>" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama Driver</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Driver"
+                            autocomplete="off" required value="<%= driver.nama %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="nid">NID (Nomor Induk Driver)</label>
+                        <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                            maxlength="5" placeholder="Input NID Maksimal 5 Karakter" id="nid" name="nid"
+                            value="<%= driver.nid %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="kota">Kota</label>
+                        <input type="text" class="form-control" id="kota" name="kota" placeholder="Input Kota Driver"
+                            autocomplete="off" required value="<%= driver.kota %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label><br>
+                        <select class="form-control selectpicker" data-live-search="true" autocomplete="off" required
+                            name="gender" id="gender">
+                            <option value="">- Pilih Gender -</option>
+                            <option value="laki-laki">Laki - Laki</option>
+                            <option value="perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Resto Bekerja</label><br>
+                        <div class="p-3 row">
+                            <% dataResto.forEach(resto => { %>
+                            <div class="col-sm-6 form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck" name="resto_ids"
+                                    value="<%= resto.id %>">
+                                <label class=" form-check-label" for="dropdownCheck">
+                                    <%= resto.nama %>
+                                </label>
+                            </div>
+                            <% } ) %>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% })%>
+
+<%- include('../templates/footer.ejs') %>

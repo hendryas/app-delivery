@@ -1,0 +1,45 @@
+<%- include('../templates/header.ejs') %>
+<%- include('../templates/navbar.ejs') %>
+
+<div class="container">
+
+    <div class="col-lg mt-5">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">Detail Product dari Resto <%= dataResto.nama %></h4>
+
+                <br>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Nama Product</th>
+                                <th>Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% no = 1 %>
+
+                            <% dataProduct.forEach(product => { %>
+                            <tr class="text-center">
+                                <th scope="row"><%= no %></th>
+                                <td><%= product.nama %></td>
+                                <td>Rp.<%= product.harga %></td>
+                            </tr>
+                            <%no++ %>
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<%- include('../templates/footer.ejs') %>
