@@ -18,6 +18,13 @@
     "password": "2d5ee0b7fe13565c2cee51e46645f8ded1071bb8fe29065e00afaa1ca4634510",
     "database": "dbsmc30n5sijek",
     "host": "ec2-34-193-44-192.compute-1.amazonaws.com",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false 
+      }
+    }
   }
 }
