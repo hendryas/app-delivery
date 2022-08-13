@@ -32,8 +32,12 @@
                             <tr class="text-center">
                                 <th scope="row"><%= no %></th>
                                 <td><%= product.nama %></td>
-                                <td>Rp.<%= product.harga %></td>
+                                <td><%= convertRupiah.convert(product.harga) %></td>
+                                <% if(product.resto == null) { %>
+                                <td></td>
+                                <% } else { %>
                                 <td><%= product.resto.nama %></td>
+                                <% } %>
                                 <td>
                                     <a href="#"><span class="badge badge-success" data-toggle="modal"
                                             data-target="#editProductModal<%= product.id %>">Edit</span></a>
@@ -116,9 +120,9 @@
                                 placeholder="Input Harga Product" id="harga" name="harga" value="<%= product.harga %>">
                         </div>
                         <div class="form-group">
-                            <label for="customerId">Nama Resto</label><br>
+                            <label for="restoId">Nama Resto</label><br>
                             <select class="form-control selectpicker" data-live-search="true" autocomplete="off"
-                                required name="customerId" id="customerId">
+                                required name="restoId" id="restoId">
                                 <option value="">- Pilih Nama Resto -</option>
                                 <% dataResto.forEach(resto => { %>
                                 <option value="<%= resto.id %>"><%= resto.nama %></option>

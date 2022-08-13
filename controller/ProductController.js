@@ -1,4 +1,5 @@
 const { product, resto } = require('../models');
+const convertRupiah = require('rupiah-format');
 
 class ProductController {
     static async getProducts(req, res) {
@@ -12,7 +13,7 @@ class ProductController {
 
             let resultResto = await resto.findAll({})
             // res.json(resultProduct);
-            res.render('product/index.ejs', { title: 'Halaman Product', dataProduct: resultProduct, dataResto: resultResto })
+            res.render('product/index.ejs', { title: 'Halaman Product', dataProduct: resultProduct, dataResto: resultResto, convertRupiah })
         } catch (err) {
             res.json(err);
         }
@@ -35,7 +36,7 @@ class ProductController {
         try {
             const id = +req.params.id;
             let { nama, harga, restoId } = req.body;
-
+            console.log(typeof restoId);
             let resultProduct = await product.update({
                 nama, harga, restoId
             }, {

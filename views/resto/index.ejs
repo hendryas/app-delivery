@@ -35,7 +35,13 @@
                                 <td><%= resto.nama %></td>
                                 <td><%= resto.alamat %></td>
                                 <td><%= resto.kota %></td>
+
+                                <% if(resto.customer == null) { %>
+                                <td>Tidak Ada</td>
+                                <% } else if(resto.customer.nama) { %>
                                 <td><%= resto.customer.nama %></td>
+                                <% } %>
+
                                 <td>
                                     <a href="/restos/info/<%= resto.id%>"><span
                                             class="badge badge-info mr-3">Info</span></a>

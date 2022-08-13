@@ -1,0 +1,721 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "app-delivery",
+    "contact": {}
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "summary": "localhost:3000/customers",
+        "tags": [
+          "customer"
+        ],
+        "operationId": "localhost:3000/customers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/customers/add": {
+      "post": {
+        "summary": "localhost:3000/customers/add",
+        "tags": [
+          "customer"
+        ],
+        "operationId": "localhost:3000/customers/add",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1customers~1addrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/customers/edit/8": {
+      "post": {
+        "summary": "localhost:3000/customers/edit/3",
+        "tags": [
+          "customer"
+        ],
+        "operationId": "localhost:3000/customers/edit/3",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1customers~1edit~13request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/customers/delete/8": {
+      "get": {
+        "summary": "localhost:3000/customers/delete/1",
+        "tags": [
+          "customer"
+        ],
+        "operationId": "localhost:3000/customers/delete/1",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restos": {
+      "get": {
+        "summary": "localhost:3000/restos",
+        "tags": [
+          "resto"
+        ],
+        "operationId": "localhost:3000/restos",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restos/add": {
+      "post": {
+        "summary": "localhost:3000/restos/add",
+        "tags": [
+          "resto"
+        ],
+        "operationId": "localhost:3000/restos/add",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1restos~1addrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restos/edit/10": {
+      "post": {
+        "summary": "localhost:3000/restos/edit/2",
+        "tags": [
+          "resto"
+        ],
+        "operationId": "localhost:3000/restos/edit/2",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1restos~1edit~12request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restos/delete/11": {
+      "get": {
+        "summary": "localhost:3000/restos/delete/3",
+        "tags": [
+          "resto"
+        ],
+        "operationId": "localhost:3000/restos/delete/3",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restos/info/7": {
+      "get": {
+        "summary": "localhost:3000/restos/info/5",
+        "tags": [
+          "resto"
+        ],
+        "operationId": "localhost:3000/restos/info/5",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/drivers": {
+      "get": {
+        "summary": "localhost:3000/drivers",
+        "tags": [
+          "driver"
+        ],
+        "operationId": "localhost:3000/drivers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/drivers/add": {
+      "post": {
+        "summary": "localhost:3000/drivers/add",
+        "tags": [
+          "driver"
+        ],
+        "operationId": "localhost:3000/drivers/add",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1drivers~1addrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/drivers/edit/13": {
+      "post": {
+        "summary": "localhost:3000/drivers/edit/13",
+        "tags": [
+          "driver"
+        ],
+        "operationId": "localhost:3000/drivers/edit/13",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1drivers~1edit~113request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/drivers/delete/2": {
+      "get": {
+        "summary": "localhost:3000/drivers/delete/2",
+        "tags": [
+          "driver"
+        ],
+        "operationId": "localhost:3000/drivers/delete/2",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "localhost:3000/products",
+        "tags": [
+          "product"
+        ],
+        "operationId": "localhost:3000/products",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/add": {
+      "post": {
+        "summary": "localhost:3000/products/add",
+        "tags": [
+          "product"
+        ],
+        "operationId": "localhost:3000/products/add",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1products~1addrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/edit/11": {
+      "post": {
+        "summary": "localhost:3000/products/edit/2",
+        "tags": [
+          "product"
+        ],
+        "operationId": "localhost:3000/products/edit/2",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/localhost%3A3000~1products~1edit~12request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/delete/11": {
+      "get": {
+        "summary": "localhost:3000/products/delete/1",
+        "tags": [
+          "product"
+        ],
+        "operationId": "localhost:3000/products/delete/1",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "localhost:3000",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "localhost:3000",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "localhost:3000/customers/addrequest": {
+      "title": "localhost:3000/customers/addrequest",
+      "example": {
+        "nama": "Wanto",
+        "umur": 21
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "umur": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "nama",
+        "umur"
+      ]
+    },
+    "localhost:3000/customers/edit/3request": {
+      "title": "localhost:3000/customers/edit/3request",
+      "example": {
+        "nama": "wanti",
+        "umur": "20"
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "umur": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nama",
+        "umur"
+      ]
+    },
+    "localhost:3000/restos/addrequest": {
+      "title": "localhost:3000/restos/addrequest",
+      "example": {
+        "nama": "Soto Ayam Nice",
+        "alamat": "Jl. Majapahit 21",
+        "kota": "Batang",
+        "customerId": 9
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "alamat": {
+          "type": "string"
+        },
+        "kota": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "nama",
+        "alamat",
+        "kota",
+        "customerId"
+      ]
+    },
+    "localhost:3000/restos/edit/2request": {
+      "title": "localhost:3000/restos/edit/2request",
+      "example": {
+        "nama": "Gatot Chicken",
+        "alamat": "Jl. Majapahit 21",
+        "kota": "Batang",
+        "customerId": 9
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "alamat": {
+          "type": "string"
+        },
+        "kota": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "nama",
+        "alamat",
+        "kota",
+        "customerId"
+      ]
+    },
+    "localhost:3000/drivers/addrequest": {
+      "title": "localhost:3000/drivers/addrequest",
+      "example": {
+        "nama": "Driver Sinta",
+        "nid": "12345",
+        "kota": "Brebes",
+        "gender": "perempuan",
+        "resto_ids": [
+          10,
+          9
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "nid": {
+          "type": "string"
+        },
+        "kota": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "resto_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "nama",
+        "nid",
+        "kota",
+        "gender",
+        "resto_ids"
+      ]
+    },
+    "localhost:3000/drivers/edit/13request": {
+      "title": "localhost:3000/drivers/edit/13request",
+      "example": {
+        "nama": "Driver Jojo",
+        "nid": "78656",
+        "kota": "Brebes",
+        "gender": "laki-laki",
+        "resto_ids": [
+          10,
+          9
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "nid": {
+          "type": "string"
+        },
+        "kota": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "resto_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "nama",
+        "nid",
+        "kota",
+        "gender",
+        "resto_ids"
+      ]
+    },
+    "localhost:3000/products/addrequest": {
+      "title": "localhost:3000/products/addrequest",
+      "example": {
+        "nama": "Fried Chicken",
+        "harga": "12000",
+        "restoId": 10
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "harga": {
+          "type": "string"
+        },
+        "restoId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "nama",
+        "harga",
+        "restoId"
+      ]
+    },
+    "localhost:3000/products/edit/2request": {
+      "title": "localhost:3000/products/edit/2request",
+      "example": {
+        "nama": "Spicy Chicken",
+        "harga": "12000",
+        "restoId": 10
+      },
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "harga": {
+          "type": "string"
+        },
+        "restoId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "nama",
+        "harga",
+        "restoId"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "customer"
+    },
+    {
+      "name": "resto"
+    },
+    {
+      "name": "driver"
+    },
+    {
+      "name": "product"
+    },
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

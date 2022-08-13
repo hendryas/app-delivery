@@ -1,4 +1,5 @@
 const { resto, customer, product } = require('../models');
+const convertRupiah = require('rupiah-format');
 
 class RestoController {
     static async getRestos(req, res) {
@@ -12,7 +13,7 @@ class RestoController {
 
             let resultCustomer = await customer.findAll({})
 
-            // res.json(resultProduct);
+            // res.json(resultResto);
             res.render('resto/index.ejs', { title: 'Halaman Resto', dataResto: resultResto, dataCustomer: resultCustomer })
         } catch (err) {
             res.json(err);
@@ -39,7 +40,7 @@ class RestoController {
         try {
             const id = +req.params.id;
             let { nama, alamat, kota, customerId } = req.body;
-
+            // console.log(typeof customerId)
             let resultResto = await resto.update({
                 nama, alamat, kota, customerId
             }, {
@@ -59,6 +60,13 @@ class RestoController {
             let resultResto = await resto.destroy({
                 where: { id }
             })
+
+            // let resultProduct = await product.destroy({
+            //     where: {
+            //         restoId: id
+            //     }
+            // })
+
             // res.json(resultResto);
             res.redirect('/restos');
         } catch (err) {
@@ -81,7 +89,7 @@ class RestoController {
             })
 
             // res.json(resultProduct);
-            res.render('resto/infoResto.ejs', { title: 'Info Resto Product', dataProduct: resultProduct, dataResto: resultResto });
+            res.render('resto/infoResto.ejs', { title: 'Info Resto Product', dataProduct: resultProduct, dataResto: resultResto, convertRupiah });
         } catch (err) {
             res.json(err);
         }

@@ -1,20 +1,6 @@
 const { driver, resto, customer, restodriver } = require('../models');
 
 class DriverController {
-    // static async getDrivers(req, res) {
-    //     try {
-    //         let resultDriver = await driver.findAll({
-    //             order: [
-    //                 ['id', 'desc']
-    //             ]
-    //         })
-
-    //         // res.json(resultDriver);
-    //         res.render('driver/index.ejs', { title: 'Halaman Driver', dataDriver: resultDriver })
-    //     } catch (err) {
-    //         res.json(err);
-    //     }
-    // }
 
     static async getDrivers(req, res) {
         let resultDriver = await driver.findAll({
@@ -61,6 +47,7 @@ class DriverController {
         })
         // console.log(data); // data berupa array yang berisi object dengan key driverId dan restoId
         await restodriver.bulkCreate(data)
+        // res.json(resultDriver)
         res.redirect('/drivers');
     }
 
@@ -72,7 +59,7 @@ class DriverController {
 
         var deleteData = await restodriver.destroy({ where: { driverId: id } }) // hapus data yang berhubungan dengan driver yang akan diupdate
 
-        await driver.update({
+        let resultDriver = await driver.update({
             nama: nama,
             nid: nid,
             kota: kota,
@@ -84,7 +71,7 @@ class DriverController {
         })
 
         await restodriver.bulkCreate(data)
-
+        // res.json(resultDriver)
         res.redirect('/drivers');
     }
 
