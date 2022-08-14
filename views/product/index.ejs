@@ -1,146 +1,172 @@
-<%- include('../templates/header.ejs') %>
-<%- include('../templates/navbar.ejs') %>
+<%- include('../templates/headerMain.ejs') %>
 
-<div class="container">
+<%- include('../templates/loader.ejs') %>
 
-    <div class="col-lg mt-5">
-        <div class="card m-b-30">
-            <div class="card-body">
+<!-- Navigation Bar-->
+<header id="topnav">
+    <%- include('../templates/topBarMain.ejs') %>
 
-                <h4 class="mt-0 header-title">Management Product</h4>
-                <p>Silahkan klik tombol dibawah ini untuk menambahkan Product</p>
-                <a href="#" class="btn btn-outline-primary mb-3" data-toggle="modal"
-                    data-target="#newProductModal">Tambahkan
-                    Product baru</a>
+    <%- include('../templates/navbarMain.ejs') %>
+</header>
+<!-- End Navigation Bar-->
 
-                <div class="table-responsive">
-                    <table class="table table-bordered dt-responsive nowrap"
-                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr class="text-center">
-                                <th>#</th>
-                                <th>Nama Product</th>
-                                <th>Harga Product</th>
-                                <th>Dari Resto</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% no = 1 %>
+<div class="wrapper">
+    <div class="container-fluid">
 
-                            <% dataProduct.forEach(product => { %>
-                            <tr class="text-center">
-                                <th scope="row"><%= no %></th>
-                                <td><%= product.nama %></td>
-                                <td><%= convertRupiah.convert(product.harga) %></td>
-                                <% if(product.resto == null) { %>
-                                <td></td>
-                                <% } else { %>
-                                <td><%= product.resto.nama %></td>
-                                <% } %>
-                                <td>
-                                    <a href="#"><span class="badge badge-success" data-toggle="modal"
-                                            data-target="#editProductModal<%= product.id %>">Edit</span></a>
-                                    <a href="/products/delete/<%= product.id %>"><span
-                                            class="badge badge-danger ml-3">Delete</span></a>
-                                </td>
-                            </tr>
-                            <%no++ %>
-                            <% })%>
-                        </tbody>
-                    </table>
+        <!-- Page-Title -->
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="btn-group float-right">
+                        <ol class="breadcrumb hide-phone p-0 m-0">
+                            <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Product</h4>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- end page title end breadcrumb -->
 
-    <div class="modal fade" id="newProductModal" tabindex="-1" aria-labelledby="newProductModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newProductModalLabel">Tambah Product Baru</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <!--====START CONTENT HERE =====-->
+        <div class="col-lg-12">
+            <div class="card m-b-30">
+                <div class="card-body">
+
+                    <h4 class="mt-0 header-title">Management Product</h4>
+                    <p>Silahkan klik tombol dibawah ini untuk menambahkan Product</p>
+                    <a href="#" class="btn btn-outline-primary mb-3" data-toggle="modal"
+                        data-target="#newProductModal">Tambahkan
+                        Product baru</a>
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>Nama Product</th>
+                                    <th>Harga Product</th>
+                                    <th>Dari Resto</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% no = 1 %>
+
+                                <% dataProduct.forEach(product => { %>
+                                <tr class="text-center">
+                                    <th scope="row"><%= no %></th>
+                                    <td><%= product.nama %></td>
+                                    <td><%= convertRupiah.convert(product.harga) %></td>
+                                    <% if(product.resto == null) { %>
+                                    <td></td>
+                                    <% } else { %>
+                                    <td><%= product.resto.nama %></td>
+                                    <% } %>
+                                    <td>
+                                        <a href="#"><span class="badge badge-success" data-toggle="modal"
+                                                data-target="#editProductModal<%= product.id %>">Edit</span></a>
+                                        <a href="/products/delete/<%= product.id %>"><span
+                                                class="badge badge-danger ml-3">Delete</span></a>
+                                    </td>
+                                </tr>
+                                <%no++ %>
+                                <% })%>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <form action="/products/add" method="POST">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama">Nama Product</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
-                                autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="harga">Harga</label>
-                            <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
-                                placeholder="Input Harga Product" id="harga" name="harga">
-                        </div>
-                        <div class="form-group">
-                            <label for="restoId">Nama Resto</label><br>
-                            <select class="form-control selectpicker" data-live-search="true" autocomplete="off"
-                                required name="restoId" id="restoId">
-                                <option value="">- Pilih Nama Resto -</option>
-                                <% dataResto.forEach(resto => { %>
-                                <option value="<%= resto.id %>"><%= resto.nama %></option>
-                                <% } ) %>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
-                    </div>
-                </form>
             </div>
+        </div> <!-- end col -->
+        <!--====END CONTENT HERE =====-->
+
+    </div> <!-- end container -->
+</div>
+<!-- end wrapper -->
+<div class="modal fade" id="newProductModal" tabindex="-1" aria-labelledby="newProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newProductModalLabel">Tambah Product Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/products/add" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama Product</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
+                            autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                            placeholder="Input Harga Product" id="harga" name="harga">
+                    </div>
+                    <div class="form-group">
+                        <label for="restoId">Nama Resto</label><br>
+                        <select class="form-control selectpicker" data-live-search="true" autocomplete="off" required
+                            name="restoId" id="restoId">
+                            <option value="">- Pilih Nama Resto -</option>
+                            <% dataResto.forEach(resto => { %>
+                            <option value="<%= resto.id %>"><%= resto.nama %></option>
+                            <% } ) %>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <% dataProduct.forEach(product => { %>
-    <div class="modal fade" id="editProductModal<%= product.id %>" tabindex="-1" aria-labelledby="editProductModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/products/edit/<%= product.id %>" method="POST">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama">Nama Product</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
-                                autocomplete="off" required value="<%= product.nama %>">
-                        </div>
-                        <div class="form-group">
-                            <label for="harga">Harga</label>
-                            <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
-                                placeholder="Input Harga Product" id="harga" name="harga" value="<%= product.harga %>">
-                        </div>
-                        <div class="form-group">
-                            <label for="restoId">Nama Resto</label><br>
-                            <select class="form-control selectpicker" data-live-search="true" autocomplete="off"
-                                required name="restoId" id="restoId">
-                                <option value="">- Pilih Nama Resto -</option>
-                                <% dataResto.forEach(resto => { %>
-                                <option value="<%= resto.id %>"><%= resto.nama %></option>
-                                <% } ) %>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <% })%>
-
 </div>
 
+<% dataProduct.forEach(product => { %>
+<div class="modal fade" id="editProductModal<%= product.id %>" tabindex="-1" aria-labelledby="editProductModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/products/edit/<%= product.id %>" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama Product</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
+                            autocomplete="off" required value="<%= product.nama %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input class="form-control" type="text" onkeypress="isInputNumber(event)" autocomplete="off"
+                            placeholder="Input Harga Product" id="harga" name="harga" value="<%= product.harga %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="restoId">Nama Resto</label><br>
+                        <select class="form-control selectpicker" data-live-search="true" autocomplete="off" required
+                            name="restoId" id="restoId">
+                            <option value="">- Pilih Nama Resto -</option>
+                            <% dataResto.forEach(resto => { %>
+                            <option value="<%= resto.id %>"><%= resto.nama %></option>
+                            <% } ) %>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% })%>
 
-<%- include('../templates/footer.ejs') %>
+<%- include('../templates/footerMain.ejs') %>

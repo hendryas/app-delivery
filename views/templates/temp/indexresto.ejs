@@ -1,0 +1,162 @@
+<%- include('../templates/header.ejs') %>
+<%- include('../templates/navbar.ejs') %>
+
+<div class="container">
+
+    <div class="col-lg mt-5">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">Management Resto</h4>
+                <p>Silahkan klik tombol dibawah ini untuk menambahkan Resto</p>
+                <a href="#" class="btn btn-outline-primary mb-3" data-toggle="modal"
+                    data-target="#newRestoModal">Tambahkan
+                    Resto baru</a>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Nama Resto</th>
+                                <th>Alamat Resto</th>
+                                <th>Kota Resto</th>
+                                <th>Nama Customer</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% no = 1 %>
+
+                            <% dataResto.forEach(resto => { %>
+                            <tr class="text-center">
+                                <th scope="row"><%= no %></th>
+                                <td><%= resto.nama %></td>
+                                <td><%= resto.alamat %></td>
+                                <td><%= resto.kota %></td>
+
+                                <% if(resto.customer == null) { %>
+                                <td>Tidak Ada</td>
+                                <% } else if(resto.customer.nama) { %>
+                                <td><%= resto.customer.nama %></td>
+                                <% } %>
+
+                                <td>
+                                    <a href="/restos/info/<%= resto.id%>"><span
+                                            class="badge badge-info mr-3">Info</span></a>
+                                    <a href="#"><span class="badge badge-success" data-toggle="modal"
+                                            data-target="#editRestoModal<%= resto.id %>">Edit</span></a>
+                                    <a href="/restos/delete/<%= resto.id %>"><span
+                                            class="badge badge-danger ml-3">Delete</span></a>
+                                </td>
+                            </tr>
+                            <%no++ %>
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newRestoModal" tabindex="-1" aria-labelledby="newRestoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newRestoModalLabel">Tambah Resto Baru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/restos/add" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama Resto</label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
+                                autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat Resto</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Input Alamat Resto" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kota">Kota Resto</label>
+                            <input type="text" class="form-control" id="kota" name="kota" placeholder="Input Kota Resto"
+                                autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerId">Nama Customer</label><br>
+                            <select class="form-control selectpicker" data-live-search="true" autocomplete="off"
+                                required name="customerId" id="customerId">
+                                <option value="">- Pilih Nama Customer -</option>
+                                <% dataCustomer.forEach(customer => { %>
+                                <option value="<%= customer.id %>"><%= customer.nama %></option>
+                                <% } ) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% dataResto.forEach(resto => { %>
+    <div class="modal fade" id="editRestoModal<%= resto.id %>" tabindex="-1" aria-labelledby="editRestoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRestoModalLabel">Edit Resto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/restos/edit/<%= resto.id %>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama Resto</label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Resto"
+                                autocomplete="off" required value="<%= resto.nama %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat Resto</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Input Alamat Resto" autocomplete="off" required
+                                value="<%= resto.alamat %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="kota">Kota Resto</label>
+                            <input type="text" class="form-control" id="kota" name="kota" placeholder="Input Kota Resto"
+                                autocomplete="off" required value="<%= resto.kota %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerId">Nama Customer</label><br>
+                            <select class="form-control selectpicker" data-live-search="true" autocomplete="off"
+                                required name="customerId" id="customerId">
+                                <option value="">- Pilih Nama Customer -</option>
+                                <% dataCustomer.forEach(customer => { %>
+                                <option value="<%= customer.id %>"><%= customer.nama %></option>
+                                <% } ) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% })%>
+
+</div>
+
+
+<%- include('../templates/footer.ejs') %>
