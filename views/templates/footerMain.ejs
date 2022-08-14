@@ -11,6 +11,18 @@
 </footer>
 <!-- End Footer -->
 
+<script>
+    //==START==//
+    //==Format Only input numbers==//
+    function isInputNumber(evt) {
+        var ch = String.fromCharCode(evt.which);
+        if (!(/[0-9]/.test(ch))) {
+            evt.preventDefault();
+        }
+    }
+    //==END==//
+    //==Format Only input numbers==//
+</script>
 
 <!-- jQuery  -->
 <script src="js/jquery.min.js"></script>
